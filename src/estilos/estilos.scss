@@ -1,0 +1,51 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  background-color: burlywood;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  .card-profile {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    width: 150px;
+    height: 350px;
+    padding: 4px;
+    margin: 10px;
+    p {
+      word-break: break-all;
+    }
+    &.card-gender-male {
+      background-color: rgba(47, 79, 79, 0.521);
+    }
+    &.card-gender-female {
+      background-color: rgba(220, 20, 60, 0.315);
+    }
+  }
+}
+
+/* .card-profile p {
+    word-break: break-all;
+}
+
+.card-profile.card-gender-male {
+    background-color: rgba(47, 79, 79, 0.521);
+}
+
+.card-profile.card-gender-female {
+    background-color: rgba(220, 20, 60, 0.315);
+}
+ */
