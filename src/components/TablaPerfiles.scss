@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+.contenedor-tabla {
+  font-family: "Poppins", sans-serif;
+ 
+}
+td,
+th {
+  border: 1px solid #57a639;
+  padding: 6px;
+  text-align: left;
+}
+.table-data-row{
+    background-color: #dddddd;
+    &.row-gender-male {
+        background-color: rgba(47, 79, 79, 0.521);
+      }
+      &.row-gender-female {
+        background-color: rgba(220, 20, 60, 0.315);
+      }
+}
+

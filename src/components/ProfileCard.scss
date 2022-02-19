@@ -1,0 +1,17 @@
+.card-profile {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  width: 150px;
+  height: 350px;
+  padding: 4px;
+  margin: 10px;
+  p {
+    word-break: break-all;
+  }
+  &.card-gender-male {
+    background-color: rgba(47, 79, 79, 0.521);
+  }
+  &.card-gender-female {
+    background-color: rgba(220, 20, 60, 0.315);
+  }
+}

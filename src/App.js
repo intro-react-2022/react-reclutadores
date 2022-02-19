@@ -1,59 +1,66 @@
 //import miLogo from "./logo.svg";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "./App.css";
 import ProfileCard from "./components/ProfileCard";
+import TablaPerfiles from "./components/TablaPerfiles";
 import "./estilos/estilos.scss";
 import { simularLlamadaDatos } from "./fake_api/simularLlamadasUsuarios";
-
-const reductor = (usuario) => {
-  const { name, location, cell, email } = usuario;
-
-  const { title, first, last } = name;
-  const { country } = location;
-
-  const genero = usuario.gender;
-  return {
-    nombre: `${title}-${first}-${last}`,
-    pais: country,
-    celular: cell,
-    correo: email,
-    imagen: usuario.picture.large,
-    genero,
-  };
-};
+import { reductor } from "./utils/reductorUsuarios";
 
 function App() {
   //const [numeroDeVeces, setNumerodeVeces] = useState(0);
   const [misUsuarios, setMisUsuarios] = useState([]);
-  async function init() {
+  const [vista, setVista] = useState("tabla");
+
+  async function funcionInicial() {
     const nuevosUsuarios = await simularLlamadaDatos();
-    //console.log(nuevosUsuarios);
     const usuariosReducidos = nuevosUsuarios.map(reductor);
-    //console.log(usuariosReducidos);
     setMisUsuarios(usuariosReducidos);
   }
 
+  // logica de inicio
+  // solo al inicio del componente
   useEffect(() => {
-    init();
-    //}, [numeroDeVeces]);
+    funcionInicial();
   }, []);
-  /* const handleClick = () => {
-    //console.log("Se hizo click!");
-    setNumerodeVeces(numeroDeVeces + 1);
-  }; */
+
+  //logica de los usuarios
+  useEffect(() => {
+    // if(misUsuarios.length>0){
+    console.log("Los usuarios han cambiado", misUsuarios.length);
+    //}
+  }, [misUsuarios]);
+  const cambiarATabla = () => {
+    setVista("tabla");
+  };
+  const cambiarATarjetas = () => {
+    setVista("tarjeta");
+  };
   return (
-    <div className="main-container">
-      {misUsuarios.map((usuario) => (
-        <ProfileCard
-          nombre={usuario.nombre}
-          imagen={usuario.imagen}
-          pais={usuario.pais}
-          celular={usuario.celular}
-          correo={usuario.correo}
-          genero={usuario.genero}
-        />
-      ))}
-    </div>
+    <Fragment>
+      <button onClick={vista === "tabla" ? cambiarATarjetas : cambiarATabla}>
+        {vista === "tabla" ? "ver tarjetas" : "ver lista"}
+      </button>
+      {vista === "tabla" ? (
+        <TablaPerfiles usuariosParaTabla={misUsuarios} />
+      ) : (
+        <div className="main-container">
+          {misUsuarios.length === 0 && <h2>Cargando usuarios ...</h2>}
+
+          {misUsuarios.map((usuario, index) => (
+            <ProfileCard
+              key={index}
+              nombre={usuario.nombre}
+              imagen={usuario.imagen}
+              pais={usuario.pais}
+              celular={usuario.celular}
+              correo={usuario.correo}
+              genero={usuario.genero}
+            />
+          ))}
+        </div>
+      )}
+    </Fragment>
   );
 }
 
