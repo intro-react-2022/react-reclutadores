@@ -3,7 +3,12 @@ import "./TablaPerfiles.scss";
 const TablaPerfiles = (props) => {
   const { usuariosParaTabla } = props;
 
-  console.log("TablaPerfiles", usuariosParaTabla);
+  //console.log("TablaPerfiles", usuariosParaTabla);
+  React.useEffect(()=>{
+    return ()=>{
+      console.log("TablaPerfiles: Retirando tabla");
+    }
+  }, []);
   return (
     <React.Fragment>
       {usuariosParaTabla.length > 0 && (
@@ -19,8 +24,8 @@ const TablaPerfiles = (props) => {
           </thead>
           <tbody>
             {usuariosParaTabla.map(
-              ({ nombre, pais, celular, correo, genero }) => (
-                <tr className={`table-data-row${genero==="male"?" row-gender-male":" row-gender-female"}`}>
+              ({ nombre, pais, celular, correo, genero }, index) => (
+                <tr key={index} className={`table-data-row${genero==="male"?" row-gender-male":" row-gender-female"}`}>
                   <td>{nombre}</td>
                   <td>{pais}</td>
                   <td>{celular}</td>

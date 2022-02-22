@@ -1,11 +1,13 @@
 //import miLogo from "./logo.svg";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import ProfileCard from "./components/ProfileCard";
 import TablaPerfiles from "./components/TablaPerfiles";
 import "./estilos/estilos.scss";
 import { simularLlamadaDatos } from "./fake_api/simularLlamadasUsuarios";
 import { reductor } from "./utils/reductorUsuarios";
+//import logoPrincipal from "./estaticos/logo_RRHH.png";
+import BarraNavegacion from "./components/BarraNavegacion";
 
 function App() {
   //const [numeroDeVeces, setNumerodeVeces] = useState(0);
@@ -37,10 +39,16 @@ function App() {
     setVista("tarjeta");
   };
   return (
-    <Fragment>
-      <button onClick={vista === "tabla" ? cambiarATarjetas : cambiarATabla}>
-        {vista === "tabla" ? "ver tarjetas" : "ver lista"}
-      </button>
+    <div className="contenedor-principal">
+     
+        <BarraNavegacion
+          vista={vista}
+          cambiarATarjetas={cambiarATarjetas}
+          cambiarATabla={cambiarATabla}
+          titulo="Reclutadores"
+        />
+      
+
       {vista === "tabla" ? (
         <TablaPerfiles usuariosParaTabla={misUsuarios} />
       ) : (
@@ -60,7 +68,7 @@ function App() {
           ))}
         </div>
       )}
-    </Fragment>
+    </div>
   );
 }
 
